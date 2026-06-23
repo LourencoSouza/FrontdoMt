@@ -1,0 +1,123 @@
+/*Area do jogador*/
+.Ps{
+    
+    width: 50%;
+    height: 100vh;
+    position: absolute;
+    background-image: url('imagens/background/PlayerBg.png');
+}
+
+.PlayerCard{
+    border: 8px solid;
+    border-image: linear-gradient(
+    45deg,
+    #3a3a3a,
+    #d9d9d9,
+    #7a7a7a,
+    #f0f0f0,
+    #4a4a4a) 1;
+    width: 25%;
+    height: 80vh;
+    background-image: url('imagens/background/SasukeBg.png');
+    top: 10vh;
+    left: 2vw;
+    
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+
+.PlayerCard img, .EnemyCard img{
+   max-width: 100%;
+   max-height: 100%;
+   align-items: center;
+}
+
+.FullBg {
+    height: 100vh;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-image: url('imagens/background/JapanBg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    padding: 0 2vw;
+}
+
+
+.personagens{
+}
+
+/*Area do Inimigo*/
+.Es{
+    
+    position: absolute;
+    width: 50%;
+    height: 100vh;
+    left: 50vw;
+    background-image: url('imagens/background/EnemyBg.png');
+    
+}
+
+.EnemyCard{
+    border: 8px solid;
+    border-image: linear-gradient(
+    45deg,
+    #3a3a3a,
+    #d9d9d9,
+    #7a7a7a,
+    #f0f0f0,
+    #4a4a4a) 1;
+    width: 25%;
+    height: 80vh;
+    
+    top: 10vh;
+    right: 2vw;
+    background-image: url('imagens/background/NarutoBg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 20% 80%;
+}
+
+.selecoes{
+    border: 8px solid;
+    border-image: linear-gradient(
+    45deg,
+    #3a3a3a,
+    #d9d9d9,
+    #7a7a7a,
+    #f0f0f0,
+    #4a4a4a) 1;
+    width: 40vw;
+    height: 30vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    top: 25vh;
+    right: 1vw;
+}
+
+.versus{
+    
+    width: 20px;
+    height: px;
+    position: relative;
+    left: 14vw;
+    bottom: 19vh;
+}
+
+.personagem{
+    border: 3px solid;
+    border-image: linear-gradient(
+    45deg,
+    #3a3a3a,
+    #d9d9d9,
+    #7a7a7a,
+    #f0f0f0,
+    #4a4a4a) 1;
+}
+
