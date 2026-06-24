@@ -4,174 +4,305 @@ import { useNavigate } from 'react-router-dom';
 
 function Select() {
 
-const navigate = useNavigate();
+    const navigate = useNavigate();
 
-const personagens = [
-{
-id:1,
-nome:"Naruto",
-icon:"imagens/personagens/icon/Narutoicon.png",
-foto:"imagens/personagens/Naruteggs.png"
-},
-{
-id:2,
-nome:"Sasuke",
-icon:"imagens/personagens/icon/SasukeIcon.png",
-foto:"imagens/personagens/Sasukeggs.png"
-},
-{
-id:3,
-nome:"Kakashi",
-icon:"imagens/personagens/icon/Kakashiicon.png",
-foto:"imagens/personagens/Kakasheggs.png"
-},
-{
-id:4,
-nome:"Pain",
-icon:"imagens/personagens/icon/Painicon.png",
-foto:"imagens/personagens/Painggs.png"
-},
-{
-id:5,
-nome:"Itachi",
-icon:"imagens/personagens/icon/Itachiicon.png",
-foto:"imagens/personagens/Itachieggs.png"
-},
-{
-id:6,
-nome:"Orochimaru",
-icon:"imagens/personagens/icon/Orochicon.png",
-foto:"imagens/personagens/Orocheggs.png"
-}
-];
+    const [personagens, setPersonagens] =
+        useState([]);
 
-const [jogador,setJogador] =
-useState(personagens[0]);
+    const [jogador, setJogador] =
+        useState(null);
 
-const [inimigo,setInimigo] =
-useState(personagens[1]);
+    const [inimigo, setInimigo] =
+        useState(null);
 
-const [ladoSelecionado,setLadoSelecionado] =
-useState("jogador");
+    const [ladoSelecionado, setLadoSelecionado] =
+        useState("jogador");
 
-return (
-<>
+    const imagens = {
 
-<div className="FullBg">
+        Naruto: {
+            icon: "imagens/personagens/icon/Narutoicon.png",
+            foto: "imagens/personagens/Naruteggs.png"
+        },
 
-<div
-className={`PlayerCard ${
-ladoSelecionado==="jogador"
-? "ladoAtivo"
-: ""
-}`}
+        Sasuke: {
+            icon: "imagens/personagens/icon/SasukeIcon.png",
+            foto: "imagens/personagens/Sasukeggs.png"
+        },
 
-onClick={()=>
-setLadoSelecionado("jogador")
-}
->
+        Kakashi: {
+            icon: "imagens/personagens/icon/Kakashiicon.png",
+            foto: "imagens/personagens/Kakasheggs.png"
+        },
 
-<img
-src={jogador.foto}
-alt=""
-/>
+        Pain: {
+            icon: "imagens/personagens/icon/Painicon.png",
+            foto: "imagens/personagens/Painggs.png"
+        },
 
-</div>
+        Itachi: {
+            icon: "imagens/personagens/icon/Itachiicon.png",
+            foto: "imagens/personagens/Itachieggs.png"
+        },
 
-<div className="versus">
-<img src='imagens/background/Versus.png' alt="" />
-</div>
+        Orochimaru: {
+            icon: "imagens/personagens/icon/Orochicon.png",
+            foto: "imagens/personagens/Orocheggs.png"
+        }
 
-<div className="personagens">
+    };
 
-<div className="selecoes">
+    useEffect(() => {
 
-{personagens.map((personagem)=>(
+        fetch("http://localhost:8081/personagem")
 
-<div
-key={personagem.id}
+            .then(res => res.json())
 
-className={`personagem ${
-(
-ladoSelecionado==="jogador"
-&& jogador.id===personagem.id
-)
+            .then(data => {
 
-||
+                setPersonagens(data);
 
-(
-ladoSelecionado==="inimigo"
-&& inimigo.id===personagem.id
-)
+                if (data.length >= 2) {
 
-? "ativo"
-: ""
+                    setJogador(data[0]);
 
-}`}
+                    setInimigo(data[1]);
 
-onClick={()=>{
+                }
 
-if(ladoSelecionado==="jogador"){
-setJogador(personagem);
-}
+            })
 
-else{
-setInimigo(personagem);
-}
+            .catch(err =>
+                console.log(err)
+            );
 
-}}
->
+    }, []);
 
-<img
-src={personagem.icon}
-alt={personagem.nome}
-/>
+    return (
+        <>
 
-</div>
+            <div className="FullBg">
 
-))}
+                <div
 
-</div>
+                    className={`PlayerCard ${ladoSelecionado === "jogador"
+                            ? "ladoAtivo"
+                            : ""
+                        }`}
 
-</div>
+                    onClick={() =>
+                        setLadoSelecionado("jogador")
+                    }
 
-<div
-className="botao"
-onClick={() =>
-navigate('/batalha')
-}
->
+                >
 
-<img
-src="imagens/Confirmar.png"
-alt=""
-/>
+                    {
 
-</div>
+                        jogador &&
 
-<div
-className={`EnemyCard ${
-ladoSelecionado==="inimigo"
-? "ladoAtivo"
-: ""
-}`}
+                        <img
+                            src={imagens[jogador.nome]?.foto}
+                            alt={jogador.nome}
+                        />
 
-onClick={()=>
-setLadoSelecionado("inimigo")
-}
->
+                    }
 
-<img
-src={inimigo.foto}
-alt=""
-/>
+                </div>
 
-</div>
+                <div className="versus">
 
-</div>
+                    <img
+                        src="imagens/background/Versus.png"
+                        alt=""
+                    />
 
-</>
-);
+                </div>
+
+                <div className="personagens">
+
+                    <div className="selecoes">
+
+                        {
+
+                            personagens.map((personagem) => (
+
+                                <div
+
+                                    key={personagem.id}
+
+                                    className={`personagem ${(
+                                            ladoSelecionado === "jogador"
+                                            && jogador?.id === personagem.id
+                                        )
+
+                                            ||
+
+                                            (
+                                                ladoSelecionado === "inimigo"
+                                                && inimigo?.id === personagem.id
+                                            )
+
+                                            ?
+
+                                            "ativo"
+
+                                            :
+
+                                            ""
+
+                                        }`}
+
+                                    onClick={() => {
+
+                                        if (
+                                            ladoSelecionado === "jogador"
+                                        ) {
+
+                                            setJogador(personagem);
+
+                                        }
+
+                                        else {
+
+                                            setInimigo(personagem);
+
+                                        }
+
+                                    }}
+
+                                >
+
+                                    <img
+
+                                        src={imagens[personagem.nome]?.icon}
+
+                                        alt={personagem.nome}
+
+                                    />
+
+                                </div>
+
+                            ))
+
+                        }
+
+                    </div>
+
+                </div>
+
+                <div
+
+
+                    className="botao"
+
+                    onClick={async () => {
+
+                        try {
+
+                            const response =
+                                await fetch(
+                                    "http://localhost:8081/partida/create",
+                                    {
+
+                                        method: "POST",
+
+                                        headers: {
+                                            "Content-Type":
+                                                "application/json"
+                                        },
+
+                                        body:
+                                            JSON.stringify({
+
+                                                personagemJogador:
+                                                    jogador.id,
+
+                                                personagemInimigo:
+                                                    inimigo.id
+
+                                            })
+
+                                    }
+
+                                );
+
+                            const partida =
+                                await response.json();
+
+                            navigate(
+                                "/batalha",
+                                {
+
+                                    state: {
+
+                                        partidaId:
+                                            partida.id,
+
+                                        jogador,
+
+                                        inimigo
+
+                                    }
+
+                                }
+
+                            );
+
+                        }
+
+                        catch (err) {
+
+                            console.log(err);
+
+                            alert(
+                                "Erro ao criar partida"
+                            );
+
+                        }
+
+                    }}
+
+                >
+
+                    <img
+                        src="imagens/Confirmar.png"
+                        alt=""
+                    />
+
+                </div>
+
+                <div
+
+                    className={`EnemyCard ${ladoSelecionado === "inimigo"
+                            ? "ladoAtivo"
+                            : ""
+                        }`}
+
+                    onClick={() =>
+                        setLadoSelecionado(
+                            "inimigo"
+                        )
+                    }
+
+                >
+
+                    {
+
+                        inimigo &&
+
+                        <img
+                            src={imagens[inimigo.nome]?.foto}
+                            alt={inimigo.nome}
+                        />
+
+                    }
+
+                </div>
+
+            </div>
+
+        </>
+    );
 
 }
 
