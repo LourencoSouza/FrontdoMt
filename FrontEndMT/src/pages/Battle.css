@@ -50,18 +50,21 @@
 }
 
 .jogador{
-    
     width: 8vw;
     height: 30vh;
     position: absolute;
     top: 60%;
     left: 40%;
-    background-image: url('imagens/personagens/NarutoBattle.png');
-    background-size: contain;
-    background-repeat: no-repeat;
     animation: anim 2s linear infinite;
-    
+    overflow: hidden;
 }
+
+.jogador img{
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+}
+
 
 .rival{
     
@@ -70,11 +73,15 @@
     position: absolute;
     top: 53%;
     left: 60%;
-    background-image: url('imagens/personagens/SasukeBattle.png');
-    background-size: contain;
-    background-repeat: no-repeat;
     transform: scaleX(-1);
     animation: animRival 2s linear infinite;
+     overflow: hidden;
+}
+
+.rival img{
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .log{

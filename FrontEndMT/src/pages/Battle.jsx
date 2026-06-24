@@ -112,7 +112,7 @@ function Batalha() {
             </div>
 
             <div className="jogador">
-                <img src={`imagens/personagens/${jogador.nome}eggs.png`} alt="" />
+                <img src={`imagens/personagens/${jogador.nome}Costa.png`} alt="" />
             </div>
 
             <div className="StatsRival">
@@ -123,7 +123,7 @@ function Batalha() {
             </div>
 
             <div className="rival">
-                <img src={`imagens/personagens/${inimigo.nome}eggs.png`} alt="" />
+                <img src={`imagens/personagens/${inimigo.nome}Frente.png`} alt="" />
             </div>
 
             <div className="AtkBar">
